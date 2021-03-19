@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     ok (data) {
+      console.log(data)
       this.$emit('update:data', data)
     }
   }
