@@ -9,6 +9,7 @@
 
 <script>
 import Main from './components/Generator/Main'
+import axios from 'axios'
 export default {
   name: 'App',
   components: {
@@ -28,6 +29,7 @@ export default {
     ok (data) {
       console.log(data)
       this.$emit('update:data', data)
+      axios.post('http://localhost:8080/api/v1/workflow/procdef/save', data)
     }
   }
 }

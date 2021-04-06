@@ -17,7 +17,7 @@
             aria-hidden="true"
           ><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z" /></svg></i>
         </div><div class="fd-nav-title">
-          {{ data1.title }}
+          {{ data1.name }}
         </div>
       </div>
       <div class="fd-nav-center">
@@ -110,8 +110,10 @@ export default {
     errors: [],
     viewModal: false,
     data1: {
-      title: '请假',
-      node: {
+      name: '大大大',
+      userid: 'u0001',
+      company: 'c0001',
+      resource: {
         name: '发起人',
         type: 'start',
         nodeId: 'sid-startevent',
@@ -128,18 +130,17 @@ export default {
     }
   },
   mounted () {
-    if (this.data && this.data.node) {
+    if (this.data && this.data.resource) {
       this.data1 = this.data
     }
-    console.log(this.data1)
     if (!this.data1.node) {
       this.initialNode()
     }
-    this.iteratorData(this.data1.node)
+    this.iteratorData(this.data1.resource)
   },
   methods: {
     initialNode () {
-      this.data1.node = {
+      this.data1.resource = {
         name: '发起人',
         type: 'start',
         nodeId: 'sid-startevent'
@@ -150,13 +151,13 @@ export default {
       iteratorData(this.items, data)
     },
     addnode (node) {
-      addNewNode(node, this.data1.node, this.items)
+      addNewNode(node, this.data1.resource, this.items)
     },
     delNode (node) {
-      delNode(node, this.data1.node, this.items)
+      delNode(node, this.data1.resource, this.items)
     },
     save () {
-      var errors = checkData(this.data1.node)
+      var errors = checkData(this.data1.resource)
       if (errors.length > 0) {
         this.errorsModal = true
         this.errors = errors
@@ -165,7 +166,7 @@ export default {
       this.$emit('ok', this.data1)
     },
     preview () {
-      var errors = checkData(this.data1.node)
+      var errors = checkData(this.data1.resource)
       if (errors.length > 0) {
         this.errorsModal = true
         this.errors = errors
